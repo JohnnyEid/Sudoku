@@ -60,28 +60,22 @@ class GameBoard {
     } // end init()
 
     updatePossibilities(){
-
-    	console.log('\nupdatePossibilities()');
-    	
+   	
     	for (var y = 0; y < 9; y++){
     		for (var x = 0; x < 9; x++){
 	        	if ($.isArray(this.final_board[y][x])){
-    				
+                    
+                    var self = this;
+
 	        		this.final_board[y][x].forEach(function(number, index){
-	        			//console.log("check: " + number + " ( " + (x+1) + ", " + (y+1) + " )");
-	        			
-	        			/**/
-	        			try {
-		        			if (this.inGroup(number, x, y) || this.inRow(number, x, y) || this.inCol(number, x, y)){
-			        			console.log("removing: " + number + " ( " + x + ", " + y + " )");
-								this.final_board[y][x].splice(index,1);
-		        			} else {
-			        			console.log("Keeping: " + number + " ( " + x + ", " + y + " )");
-		        			}
-		        		} catch (err){
-	        				console.log("error: " + number + " ( " + x + ", " + y + " )" + "\n" + err);
-		        		}
-	        			/**/
+	        		
+                    	if (self.inGroup(number, x, y) || self.inRow(number, x, y) || self.inCol(number, x, y)){
+		        			console.log("removing: " + number + " ( " + x + ", " + y + " )");
+							self.final_board[y][x].splice(index,1);
+	        			} else {
+		        			console.log("Keeping: " + number + " ( " + x + ", " + y + " )");
+	        			}
+	        		
 	        		});
     			}
 	        }	
